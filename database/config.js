@@ -1,23 +1,23 @@
 export default {
   development: {
-    username: 'student',
-    password: 'INST377@UMD',
+    username: 'fergusonadmin',
+    password: 'inst377atumd',
     database: 'ikea_db',
-    host: '3.236.243.212',
+    host: 'ikea-db.cd3xreiuvhmr.us-east-2.rds.amazonaws.com',
     dialect: 'mysql'
   },
   test: {
-    username: 'student',
-    password: 'INST377@UMD',
+    username: 'fergusonadmin',
+    password: 'inst377atumd',
     database: 'ikea_db',
-    host: '3.236.243.212',
+    host: 'ikea-db.cd3xreiuvhmr.us-east-2.rds.amazonaws.com',
     dialect: 'mysql'
   },
   production: {
-    username: 'student',
-    password: 'INST377@UMD',
+    username: 'fergusonadmin',
+    password: 'inst377atumd',
     database: 'ikea_db',
-    host: '3.236.243.212',
+    host: 'ikea-db.cd3xreiuvhmr.us-east-2.rds.amazonaws.com',
     dialect: 'mysql'
   }
 };
