@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
-import express from 'express';
+import express from 'express'
 import sequelize from 'sequelize';
+import _ from 'lodash/has.js';
+
 
 import db from '../database/initializeDB.js';
 
@@ -10,30 +12,17 @@ const router = express.Router();
 /// ////custom Endpoints////////
 /// /////////////////////////////////
 router.route('/wholeProduct').get(async (req, res) => {
-  try {
+
     const productsData = await db.products.findAll();
     const prodCategories = await db.productCategories.findAll();
     const prodFamilies = await db.productFamilies.findAll();
 
-    console.log(productsData[0]);
-
-    const wholeProducts = await productsData.map((product) => {
-      // eslint-disable-next-line max-len
-      console.log(productsData[product.product_id].family_id)
-      const categoryMatch = prodCategories.find((category) => category.category_id === productsData[product.product_id].category_id);
-      const familyMatch = prodFamilies.find((family) => family.family_id === productsData[product.product_id].family_id);
-
-      return {
-        ...product.dataValues,
-        ...categoryMatch.dataValues,
-        ...familyMatch.dataValues
-      };
+    const wholeProduct = _.map(productsData, function(product){
+      return _.extend(product, _.findWhere(prodCategories, {category_id: product.category_id}))
     });
-    res.json({data: wholeProducts});
-  } catch (err) {
-    console.log(err);
-    res.error('server error');
-  }
+
+    res.send({data : wholeProduct})
+
 });
 
 /// /////////////////////////////////
